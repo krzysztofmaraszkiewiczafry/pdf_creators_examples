@@ -1,0 +1,213 @@
+﻿    <!DOCTYPE html>
+
+    <html>
+
+    <head>
+        <title>Offert </title>
+        <meta charset="utf-8" />
+        <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
+        <script type='text/javascript'>
+            google.charts.load('current', {packages: ['corechart', 'bar']});
+            google.charts.setOnLoadCallback(drawBasic);
+            google.charts.setOnLoadCallback(drawChart);
+            function drawBasic() {
+                var data = google.visualization.arrayToDataTable([
+                    ['City', '2010 Population',],
+                    ['New York City, NY', 8175000],
+                    ['Los Angeles, CA', 3792000],
+                    ['Chicago, IL', 2695000],
+                    ['Houston, TX', 2099000],
+                    ['Philadelphia, PA', 1526000]
+                ]);
+
+                var options = {
+                    title: 'Population of Largest U.S. Cities',
+                    chartArea: { width: '50%' },
+                    hAxis: {
+                        title: 'City',
+                        minValue: 0
+                    },
+                    vAxis: {
+                        title: 'Total Population'
+                    }
+                };
+
+                var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+                chart.draw(data, options);
+            }
+
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['City', '2010 Population'],
+                    ['New York City, NY', 8175000],
+                    ['Los Angeles, CA', 3792000],
+                    ['Chicago, IL', 2695000],
+                    ['Houston, TX', 2099000],
+                    ['Philadelphia, PA', 1526000]
+                ]);
+
+                var options = {
+                    title: 'Population of Largest U.S. Cities'
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                chart.draw(data, options);
+            }
+        </script>
+        <style>
+            html,
+            body {
+                margin: 50px;
+                padding: 0;
+                height: 100%;
+                width: 100%;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            table {
+                width: 100%;
+                border: none;
+                margin-right: auto;
+                margin-left: auto;
+                border-collapse: collapse;
+                /*table-layout: fixed;*/
+            }
+
+
+                table th {
+                    word-wrap: break-word;
+                }
+
+            #articleTable tr td {
+                border: black 1px solid;
+            }
+
+            #articleTable tr th {
+                border: black 1px solid;
+                border-bottom: none;
+                background-color: gray;
+            }
+
+            p {
+                text-align: justify;
+            }
+
+            .container {
+                background-color: white;
+                min-height: 100%;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <table>
+
+            <tbody>
+                <tr>
+                    <td>
+                        <div>
+                            <h3>Offert gällande: @{ProjectName}</h3>
+                            <p>Vi tackar för förfrågan och lämnar härmed priser för rubricerat projekt.</p>
+                            <br />
+                        </div>
+
+                        <div style="page-break-inside: avoid">
+                            <h4>Notering</h4>
+                            <p style="white-space: pre-line">@{FreeText}</p>
+                        </div>
+
+                        <div>
+                            <h4>Förutsättningar</h4>
+                            <p style="white-space: pre-line">@{Prerequisites}</p>
+                        </div>
+
+                        <div style="page-break-inside: avoid">
+                            <h4>Övrigt</h4>
+                            <p>Priserna är fasta t.o.m &nbsp; @{ValidTo}</p>
+                        </div>
+
+                        <div style="page-break-inside: avoid">
+                            <br />
+                            <p>Med Vänlig Hälsning</p><br />
+                            <span>....................................................</span><br /><br />
+                            <span>@{ProjectManager}</span>
+                            <br />
+                        </div>
+
+                        <div style='page-break-inside: avoid;'>
+                            <br /><br /><br /><br />
+                        </div>
+
+                        <div style='page-break-inside: avoid;'>
+                            <br />
+                            <h3>@{CustomerName}</h3>
+                            <span style='text-decoration: underline;'> Beställning av ovanstående mottagning </span>
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td height='40'>
+                                            <p><span>Ort och Datum</span></p>
+                                        </td>
+                                        <td height='40'>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        <td height='40'>
+                                            <p>...............................................................................</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td height='40'>
+                                            <p><span>Företag</span></p>
+                                        </td>
+                                        <td height='40'>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        <td height='40'>
+                                            <p>...............................................................................</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td height='40'>
+                                            <p><span>Adress & tfn</span></p>
+                                        </td>
+                                        <td height='40'>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        <td height='40'>
+                                            <p>...............................................................................</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td height='40'>
+                                            <p><span>Organisationsnummer</span></p>
+                                        </td>
+                                        <td height='40'>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        <td height='40'>
+                                            <p>...............................................................................</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td height='40'>
+                                            <p><span>Signatur</span></p>
+                                        </td>
+                                        <td height='40'>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        <td height='40'>
+                                            <p>...............................................................................</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td height='40'>
+                                            <p><span>Namnförtyligande</span></p>
+                                        </td>
+                                        <td height='40'>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        <td height='40'>
+                                            <p>...............................................................................</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div id='chart_div'></div>
+        <div id="piechart" style="width: 900px; height: 500px; margin-top: 300px;"></div>
+    </body>
+</html>
