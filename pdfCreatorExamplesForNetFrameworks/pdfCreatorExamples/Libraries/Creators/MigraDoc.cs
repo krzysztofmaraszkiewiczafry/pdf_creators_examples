@@ -6,7 +6,7 @@ using PdfSharp.Pdf;
 
 namespace pdfCreatorExamples.Libraries
 {
-    public class MigraDocCreator : IPdfCreator
+    public class MigraDocCreator //: IPdfCreator
     {
         public void CreatePdf()
         {

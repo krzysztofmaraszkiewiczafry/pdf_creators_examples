@@ -18,7 +18,15 @@ void CreatePdf()
     byte[] pdfFileInBytes = converter.Convert(htmlToPdfDocument);
 
     File.WriteAllBytes(pdfPath, pdfFileInBytes);
+    try
+    {
     Process.Start(pdfPath);
+    }
+    catch (Exception ex) 
+    {
+        Console.WriteLine($"Could not open the file, but pdf file create with success. You have to open it manualy");
+        Console.WriteLine($"Path of created pdf is here: {pdfPath}");
+    }
 }
 
 static HtmlToPdfDocument GetHtmlToPdfDocument()
