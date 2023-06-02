@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Vertical Column Chart (Highcharts)</title>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+</head>
+<body>
+    <div id="columnChart"></div>
+
+    <script>
+        Highcharts.chart('columnChart', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Vertical Column Chart'
+            },
+            xAxis: {
+                categories: ['Apples', 'Bananas', 'Oranges', 'Grapes', 'Berries']
+            },
+            yAxis: {
+                title: {
+                    text: 'Quantity'
+                }
+            },
+            series: [{
+                name: 'Fruits',
+                data: [5, 3, 7, 2, 4]
+            }]
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Vertical Column Chart (Google Charts)</title>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+    <div id="columnChart"></div>
+
+    <script>
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['City', 'Population'],
+                ['New York', 8622698],
+                ['Los Angeles', 3990456],
+                ['Chicago', 2716450],
+                ['Houston', 2312717],
+                ['Phoenix', 1660272]
+            ]);
+
+            var options = {
+                title: 'Population of Major U.S. Cities',
+                hAxis: {
+                    title: 'City'
+                },
+                vAxis: {
+                    title: 'Population',
+                    format: 'decimal'
+                }
+            };
+
+            var chart = new google.visualization.ColumnChart(document.getElementById('columnChart'));
+            chart.draw(data, options);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Pie Chart (Highcharts)</title>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+</head>
+<body>
+    <div id="pieChart"></div>
+
+    <script>
+        Highcharts.chart('pieChart', {
+            chart: {
+                type: 'pie'
+            },
+            title: {
+                text: 'Pie Chart'
+            },
+            series: [{
+                name: 'Fruits',
+                colorByPoint: true,
+                data: [{
+                    name: 'Apples',
+                    y: 5
+                }, {
+                    name: 'Bananas',
+                    y: 3
+                }, {
+                    name: 'Oranges',
+                    y: 7
+                }, {
+                    name: 'Grapes',
+                    y: 2
+                }, {
+                    name: 'Berries',
+                    y: 4
+                }]
+            }]
+        });
+    </script>
+</body>
+</html>

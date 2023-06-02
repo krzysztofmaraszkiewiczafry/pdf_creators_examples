@@ -5,7 +5,7 @@ namespace pdfCreatorExamples.Libraries
 {
     public class PdfCreatorBase
     {
-        protected static string GeneratePdfFile(string fileNameSuffix)
+        protected static string GetPdfFilePath(string fileNameSuffix)
         {
             string pdfDirectoryPath = GeneratePdfDirectory();
 

@@ -8,11 +8,11 @@ namespace pdfCreatorExamples.Libraries
     /// <summary>
     /// Not working for .net 4.8, this solution is working only for .net core frameworks
     /// </summary>
-    public class DinkToPdfPdfCreator : PdfCreatorBase, IPdfCreator
+    public class DinkToPdfPdfCreator : PdfCreatorBase//, IPdfCreator
     {
         public void CreatePdf()
         {
-            string pdfPath = GeneratePdfFile(nameof(DinkToPdfPdfCreator));
+            string pdfPath = GetPdfFilePath(nameof(DinkToPdfPdfCreator));
 
             //create pdf converter
             var converter = new SynchronizedConverter(new PdfTools());
