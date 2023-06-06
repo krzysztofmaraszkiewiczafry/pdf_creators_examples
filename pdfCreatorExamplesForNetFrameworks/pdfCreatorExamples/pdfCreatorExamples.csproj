@@ -250,11 +250,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Libraries\Creators\DinkToPdfPdfCreator.cs" />
     <Compile Include="Libraries\Models\DocumentOneBodyModel.cs" />
-    <Compile Include="Libraries\IPdfCreator.cs" />
-    <Compile Include="Libraries\Creators\MigraDoc.cs" />
-    <Compile Include="Libraries\PdfCreatorBase.cs" />
     <Compile Include="Libraries\Creators\SelectPdfCreator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -8,10 +8,10 @@ using SelectPdf;
 
 namespace pdfCreatorExamples.Libraries
 {
-    public class SelectPdfCreator : PdfCreatorBase, IPdfCreator
+    public static class SelectPdfCreator
     {
         //demo html files with example of charts from 3 diffrent free libraries
-        private readonly Dictionary<string, string> chartsDemoHtmlFiles = new Dictionary<string, string>
+        private static readonly Dictionary<string, string> chartsDemoHtmlFiles = new Dictionary<string, string>
         {
             { "Chartjs_pie_chart", "Chart.js\\pie_chart.html" },
             { "Chartjs_vertical_column_chart", "Chart.js\\vertical_column_chart.html" },
@@ -21,7 +21,7 @@ namespace pdfCreatorExamples.Libraries
             { "Highcharts_vertical_column_chart", "Highcharts\\vertical_column_chart.html" },
         };
 
-        public async Task CreatePdfAsync()
+        public static async Task CreatePdfAsync()
         {
             List<Task> tasks = new List<Task>(); 
             foreach (KeyValuePair<string, string> chartsDemoHtmlFile in chartsDemoHtmlFiles) 
@@ -107,6 +107,27 @@ namespace pdfCreatorExamples.Libraries
                 ValidTo = DateTime.Now.ToShortDateString(),
                 CreatedDate = DateTime.Now.ToShortDateString()
             };
+        }
+
+        private static string GetPdfFilePath(string fileNameSuffix)
+        {
+            string pdfDirectoryPath = GeneratePdfDirectory();
+
+            return Path.Combine(pdfDirectoryPath, $"{fileNameSuffix}_{Guid.NewGuid()}.pdf");
+        }
+
+        private static string GeneratePdfDirectory()
+        {
+            string pdfDirectoryPath = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                "pdfFiles");
+
+            if (!Directory.Exists(pdfDirectoryPath))
+            {
+                Directory.CreateDirectory(pdfDirectoryPath);
+            }
+
+            return pdfDirectoryPath;
         }
     }
 }
