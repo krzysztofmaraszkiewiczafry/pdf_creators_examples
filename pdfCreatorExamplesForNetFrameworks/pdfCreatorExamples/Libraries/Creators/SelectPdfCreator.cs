@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
+using pdfCreatorExamples.Services;
 using SelectPdf;
 
 namespace pdfCreatorExamples.Libraries
@@ -13,45 +15,66 @@ namespace pdfCreatorExamples.Libraries
         {
             { "Chartjs_pie_chart", "Chart.js\\pie_chart.html" },
             { "Chartjs_vertical_column_chart", "Chart.js\\vertical_column_chart.html" },
-            //{ "GoogleCharts_vertical_column_chart", "GoogleCharts\\vertical_column_chart.html" },
-            //{ "GoogleCharts_pie_chart", "GoogleCharts\\pie_chart.html" },
-            //{ "Highcharts_pie_chart", "Highcharts\\pie_chart.html" },
-            //{ "Highcharts_vertical_column_chart", "Highcharts\\vertical_column_chart.html" },
+            { "GoogleCharts_vertical_column_chart", "GoogleCharts\\vertical_column_chart.html" },
+            { "GoogleCharts_pie_chart", "GoogleCharts\\pie_chart.html" },
+            { "Highcharts_pie_chart", "Highcharts\\pie_chart.html" },
+            { "Highcharts_vertical_column_chart", "Highcharts\\vertical_column_chart.html" },
         };
 
-        public void CreatePdf()
+        public async Task CreatePdfAsync()
         {
-            //Console.WriteLine($"Starting genereting demo pdf for sample table and charts for SelectPdfCreator");
-            //GeneratePdfFile(nameof(SelectPdfCreator), "demoTemplate.html");
-
+            List<Task> tasks = new List<Task>(); 
             foreach (KeyValuePair<string, string> chartsDemoHtmlFile in chartsDemoHtmlFiles) 
             {
-                Console.WriteLine($"Starting genereting demo pdf file for {chartsDemoHtmlFile.Key} using {chartsDemoHtmlFile.Value} html file");
-                GeneratePdfFile(chartsDemoHtmlFile.Key, chartsDemoHtmlFile.Value);
+                tasks.Add(GeneratePdfFileAsync(chartsDemoHtmlFile.Key, chartsDemoHtmlFile.Value));
+            }
+
+            await Task.WhenAll(tasks);
+        }
+
+        private static async Task GeneratePdfFileAsync(string pdfSuffixNameWithExtension, string chartHtmlFileRelativePath)
+        {
+            Console.WriteLine($"Starting genereting demo pdf file for {pdfSuffixNameWithExtension} using {chartHtmlFileRelativePath} html file");
+
+            try
+            {
+                DocumentOneBodyModel parameters = GetDocumentOneBodyModel();
+                string chartHtmlBody = GetHtmlBody(chartHtmlFileRelativePath);
+                string mainHtmlBody = SetParametersToHtml(GetHtmlBody("demo.html"), parameters);
+                string chartScreenShotFilePath = await BrowserScreenShotService.TakePhotoAndReturnImagePath(chartHtmlBody, "#myChart");
+
+                //set image path to html img node
+                mainHtmlBody = mainHtmlBody.Replace("@{ImagePath}", Path.GetFullPath(chartScreenShotFilePath));
+
+                string pdfPath = GeneratePdfDocumentAndReturnPdfFilePath(pdfSuffixNameWithExtension, mainHtmlBody);
+
+                //open pdf
+                Console.WriteLine($"Opening the file {pdfPath}");
+                Process.Start(pdfPath);
+
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine($"Error: {err.Message}");
             }
         }
 
-        private static void GeneratePdfFile(string name, string filePath)
+        private static string GeneratePdfDocumentAndReturnPdfFilePath(string pdfSuffixNameWithExtension, string htmlToConvert)
         {
-            string pdfPath = GetPdfFilePath(name);
+            string pdfPath = GetPdfFilePath(pdfSuffixNameWithExtension);
 
-            DocumentOneBodyModel parameters = GetDocumentOneBodyModel();
-            string htmlBody = SetParametersToHtml(GetHtmlBody(filePath), parameters);
+            // Convert the HTML to PDF using SelectPdf
+            var converter = new HtmlToPdf();
+            converter.Options.PdfPageSize = PdfPageSize.A4;
+            converter.Options.PdfPageOrientation = PdfPageOrientation.Portrait;
+            PdfDocument pdfDocument = converter.ConvertHtmlString(htmlToConvert);
 
-            // instantiate the html to pdf converter
-            HtmlToPdf converter = new HtmlToPdf();
-
-            // convert the url to pdf
-            PdfDocument doc = converter.ConvertHtmlString(htmlBody);
-
-            // save pdf document
-            doc.Save(pdfPath);
+            pdfDocument.Save(pdfPath);
 
             // close pdf document
-            doc.Close();
-            //open pdf
-            Console.WriteLine($"Opening the file {pdfPath}");
-            Process.Start(pdfPath);
+            pdfDocument.Close();
+
+            return pdfPath;
         }
 
         private static string GetHtmlBody(string path) =>

@@ -5,10 +5,10 @@
     <script src="https://code.highcharts.com/highcharts.js"></script>
 </head>
 <body>
-    <div id="columnChart"></div>
+    <div id="myChart"></div>
 
     <script>
-        Highcharts.chart('columnChart', {
+        Highcharts.chart('myChart', {
             chart: {
                 type: 'column'
             },
@@ -26,7 +26,12 @@
             series: [{
                 name: 'Fruits',
                 data: [5, 3, 7, 2, 4]
-            }]
+            }],
+            plotOptions: {
+                series: {
+                    animation: false
+                }
+            }
         });
     </script>
 </body>

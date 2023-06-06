@@ -5,7 +5,7 @@
     <script src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
-    <div id="columnChart"></div>
+    <div id="myChart"></div>
 
     <script>
         google.charts.load('current', { 'packages': ['corechart'] });
@@ -32,7 +32,7 @@
                 }
             };
 
-            var chart = new google.visualization.ColumnChart(document.getElementById('columnChart'));
+            var chart = new google.visualization.ColumnChart(document.getElementById('myChart'));
             chart.draw(data, options);
         }
     </script>

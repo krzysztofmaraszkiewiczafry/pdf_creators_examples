@@ -5,10 +5,10 @@
     <script src="https://code.highcharts.com/highcharts.js"></script>
 </head>
 <body>
-    <div id="pieChart"></div>
+    <div id="myChart"></div>
 
     <script>
-        Highcharts.chart('pieChart', {
+        Highcharts.chart('myChart', {
             chart: {
                 type: 'pie'
             },
@@ -34,7 +34,12 @@
                     name: 'Berries',
                     y: 4
                 }]
-            }]
+            }],
+            plotOptions: {
+                series: {
+                    animation: false
+                }
+            }
         });
     </script>
 </body>

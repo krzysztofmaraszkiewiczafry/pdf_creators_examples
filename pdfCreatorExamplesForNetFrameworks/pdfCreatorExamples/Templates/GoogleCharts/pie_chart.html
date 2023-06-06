@@ -5,7 +5,7 @@
     <script src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
-    <div id="pieChart"></div>
+    <div id="myChart"></div>
 
     <script>
         google.charts.load('current', { 'packages': ['corechart'] });
@@ -24,7 +24,7 @@
                 title: 'My Daily Activities'
             };
 
-            var chart = new google.visualization.PieChart(document.getElementById('pieChart'));
+            var chart = new google.visualization.PieChart(document.getElementById('myChart'));
             chart.draw(data, options);
         }
     </script>

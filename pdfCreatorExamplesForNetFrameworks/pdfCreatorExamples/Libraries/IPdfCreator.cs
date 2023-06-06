@@ -1,7 +1,9 @@
-﻿namespace pdfCreatorExamples.Libraries
+﻿using System.Threading.Tasks;
+
+namespace pdfCreatorExamples.Libraries
 {
     public interface IPdfCreator
     {
-        void CreatePdf();
+        Task CreatePdfAsync();
     }
 }
