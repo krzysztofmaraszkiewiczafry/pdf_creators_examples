@@ -1,5 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using pdfCreatorExamples.Libraries;
+using pdfCreatorExamples.Libraries.Creators;
 
 namespace pdfCreatorExamples
 {
@@ -7,7 +10,15 @@ namespace pdfCreatorExamples
     {
         static async Task Main()
         {
-            await SelectPdfCreator.CreatePdfAsync();
+            var tasks = new List<Task>
+            {
+                new SelectPdfCreator().CreatePdfAsync(),
+                new TuesPechkinPdfCreator().CreatePdfAsync()
+            };
+
+            await Task.WhenAll(tasks);
+
+            Console.ReadLine();
         }
     }
 }
